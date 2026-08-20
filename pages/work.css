@@ -1,0 +1,95 @@
+/* =========================================================
+   ebi-yaa kwaw — work page
+   Loaded after app.css. Values measured at 1440 (content 1384).
+   Document structure:
+     section.s-work > .wrap > .work-head + .work-body
+   ========================================================= */
+
+/* ---------- page shell ---------- */
+.s-work {
+  padding: 0 var(--pad);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 32px;
+}
+.s-work .wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+/* ---------- title block (same shape as the homepage hero) ---------- */
+.work-head {
+  padding-top: 64px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 24px;
+}
+.work-head .fit-line {
+  line-height: 1;
+  width: 100%;
+}
+
+/* ---------- body block ---------- */
+.work-body {
+  display: flex;
+  flex-direction: column;
+  gap: 48px;
+  padding-bottom: 80px;
+}
+
+/* ---------- grid ---------- */
+.work-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: start;
+  gap: 24px;
+}
+
+/* caption cta text — card itself is the click target, this is a visual cue only */
+.work-link {
+  font-size: 16px;
+  line-height: 1.2;
+  font-weight: 400;
+  letter-spacing: -0.02em;
+  text-decoration: underline;
+  opacity: 0.7;
+}
+/* grid items — app.css's flex sizing does not apply inside a grid */
+.work-grid .work-card {
+  flex: none;
+  width: 100%;
+}
+.work-grid .work-media { aspect-ratio: 680 / 567; }
+
+/* =========================================================
+   tablet — 810 to 1199
+   ========================================================= */
+@media (max-width: 1199px) {
+  .work-head { padding-top: 56px; }
+  .work-body { gap: 40px; padding-bottom: 64px; }
+}
+
+/* =========================================================
+   mobile — up to 809
+   ========================================================= */
+@media (max-width: 809px) {
+  .s-work { gap: 24px; }
+  .s-work .wrap { gap: 24px; }
+
+  .work-head {
+    padding-top: 48px;
+    align-items: flex-start;
+    gap: 16px;
+  }
+
+  .work-body { gap: 32px; padding-bottom: 40px; }
+
+  .work-grid {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+  .work-grid .work-media { aspect-ratio: 1.1; }
+}

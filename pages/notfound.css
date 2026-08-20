@@ -1,0 +1,84 @@
+/* =========================================================
+   ebi-yaa kwaw — 404 / page not found
+   pages/notfound.css   —   linked AFTER app.css
+   Type + spacing tokens taken from REFERENCE-SPEC.md
+   (section display 120/0.9, lead 24, small label 20 @ .7).
+   ========================================================= */
+
+/* One centred band between the nav and the footer.
+   280px is the reference's big-band padding on the homepage
+   and 160–200px is the range used on the quieter pages; the
+   404 sits at the calm end of that range. */
+.s-404 {
+  padding: 200px var(--pad);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.nf {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 32px;
+  text-align: center;
+}
+
+/* label + display heading share the 10px group gap used by the
+   overview / meta groups elsewhere in the system */
+.nf-head {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+/* small label — 20/1.2 w400 ls -0.04em lowercase @ .7 */
+.nf-tag {
+  font-size: 20px;
+  line-height: 1.2;
+  font-weight: 400;
+  letter-spacing: -0.04em;
+  opacity: 0.7;
+}
+
+/* section display — 120/0.9 w700 ls -0.06em lowercase, centred */
+.nf-title {
+  font-size: 120px;
+  line-height: 0.9;
+  font-weight: 700;
+  letter-spacing: -0.06em;
+  text-align: center;
+}
+
+/* lead — 24/1.2 w500 ls -0.02em lowercase */
+.nf-body {
+  max-width: 640px;
+  font-size: 24px;
+  line-height: 1.2;
+  font-weight: 500;
+  letter-spacing: -0.02em;
+  opacity: 0.7;
+}
+
+/* .btn is flex-start aligned by default in app.css */
+.nf .btn { align-self: center; }
+
+/* =========================================================
+   tablet — 810 to 1199
+   ========================================================= */
+@media (max-width: 1199px) {
+  .s-404 { padding: 160px var(--pad); }
+  .nf-title { font-size: 84px; }
+}
+
+/* =========================================================
+   mobile — up to 809
+   ========================================================= */
+@media (max-width: 809px) {
+  .s-404 { padding: 100px var(--pad); }
+  .nf { gap: 24px; }
+  .nf-tag { font-size: 16px; }
+  .nf-title { font-size: 44px; }
+  .nf-body { font-size: 20px; }
+}

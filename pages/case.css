@@ -1,0 +1,278 @@
+/* =========================================================
+   ebi-yaa kwaw — single project / case study template
+   pages/case.css   —   linked AFTER app.css
+   All values measured off the reference template at 1440px
+   (content column 1384px). See REFERENCE-SPEC.md
+   "Page: CASE STUDY TEMPLATE".
+   ========================================================= */
+
+/* ---------------------------------------------------------
+   page container
+   padding 144 / 28 / 80, flex column, gap 76, align flex-start.
+   Each direct child is a `.wrap` so the inner column caps at
+   --col (1384px) and centres itself.
+   --------------------------------------------------------- */
+.case {
+  padding: 144px var(--pad) 80px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 76px;
+}
+
+/* ---------------------------------------------------------
+   media primitive
+   Same geometry contract as `.work-media` in app.css, but a
+   separate class: `.work-media` is a "see more" cursor hot
+   zone (cursor.js) and these blocks are not links.
+   `data-px` on the element enables the scroll-velocity
+   pixelation in site.js — it appends a <canvas> and flips
+   `.px-ready` on once the source image has decoded.
+   --------------------------------------------------------- */
+.case-media {
+  display: block;
+  position: relative;
+  width: 100%;
+  aspect-ratio: var(--ar, 1.682);
+  border-radius: 8px;
+  overflow: hidden;
+  background: #1c1c1c;
+}
+.case-media img,
+.case-media canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.case-media canvas { opacity: 0; transition: opacity 0.2s ease; }
+.case-media.px-ready canvas { opacity: 1; }
+.case-media.px-ready img { opacity: 0; }
+
+/* shared label — 20/1.2 w400 ls -0.04em lowercase @ .7 */
+.case-label {
+  font-size: 20px;
+  line-height: 1.2;
+  font-weight: 400;
+  letter-spacing: -0.04em;
+  opacity: 0.7;
+  margin: 0;
+}
+
+/* ---------------------------------------------------------
+   block 1 — title + hero media
+   flex column, gap 96, align center
+   hero: full width (1384), aspect-ratio 1384/823 = 1.682
+   --------------------------------------------------------- */
+.case-intro {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 96px;
+}
+.case-title {
+  width: 100%;
+  font-size: 120px;
+  line-height: 0.9;
+  font-weight: 700;
+  letter-spacing: -0.06em;
+  text-align: left;
+}
+.case-hero { --ar: 1.682; }
+
+/* ---------------------------------------------------------
+   block 2 — overview + meta row
+   flex column, gap 56, align center
+   --------------------------------------------------------- */
+.case-summary {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 56px;
+}
+.case-overview {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+.case-overview-body {
+  font-size: 44px;
+  line-height: 1.2;
+  font-weight: 500;
+  letter-spacing: -0.02em;
+  text-align: center;
+}
+.case-meta {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+}
+.case-meta-item {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.case-meta-value {
+  font-size: 24px;
+  line-height: 1.2;
+  font-weight: 500;
+  letter-spacing: -0.04em;
+}
+
+/* ---------------------------------------------------------
+   block 3 — gallery grid
+   2 equal columns, gap 24.
+   .is-full  → spans both columns, aspect-ratio 1.682
+   default   → half block, aspect-ratio 680/563 = 1.208
+   --------------------------------------------------------- */
+.case-gallery {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+}
+.case-gallery .case-media { --ar: 1.208; }
+.case-gallery .case-media.is-full {
+  grid-column: 1 / -1;
+  /* --ar: 1.682; */
+  height: fit-content;
+  max-height: 90vh;
+  object-fit: contain;
+  position: relative;
+}
+
+/* avatar row — 4 equal blocks sharing the full width, same line, equal height */
+.avatar-row {
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+}
+.avatar-row .case-media { --ar: 1; }
+
+/* Optional full-width prose block inside the gallery grid.
+   Not part of the reference layout (that template is media
+   only) — added so a project's written sections have a home.
+   Uses the same label + 24px body tokens as the rest of the
+   page, one narrative column, left aligned. */
+.case-text {
+  grid-column: 1 / -1;
+  width: 100%;
+  max-width: 900px;
+  margin-inline: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 16px 0;
+}
+.case-text p,
+.case-text li {
+  font-size: 24px;
+  line-height: 1.3;
+  font-weight: 500;
+  letter-spacing: -0.02em;
+  opacity: 0.8;
+  margin: 0;
+}
+.case-text ul {
+  margin: 0;
+  padding-left: 22px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.case-text li::marker { color: var(--fg); opacity: 0.4; }
+.case-text strong { font-weight: 700; opacity: 1; }
+
+/* ---------------------------------------------------------
+   block 4 — other projects
+   flex column, gap 56, align center
+   row: 3 × .work-card, gap 20, justify center
+   card 448 wide, media aspect-ratio 448/440 = 1.018
+   --------------------------------------------------------- */
+.case-related {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 56px;
+}
+.case-related-title {
+  width: 100%;
+  font-size: 120px;
+  line-height: 0.9;
+  font-weight: 700;
+  letter-spacing: -0.06em;
+  text-align: center;
+}
+.case-related-row {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  gap: 20px;
+}
+.case-related-row .work-card { flex: 1 1 0; min-width: 0; }
+
+/* =========================================================
+   tablet — 810 to 1199
+   ========================================================= */
+@media (max-width: 1199px) {
+  .case { padding-top: 120px; gap: 64px; }
+  .case-intro { gap: 72px; }
+  .case-title,
+  .case-related-title { font-size: 84px; }
+  .case-overview-body { font-size: 34px; }
+  .case-meta { flex-wrap: wrap; row-gap: 32px; }
+  .case-meta-item { flex: 1 1 40%; }
+  .case-text p,
+  .case-text li { font-size: 20px; }
+  .avatar-row { grid-template-columns: repeat(2, 1fr); gap: 16px; }
+}
+
+/* =========================================================
+   mobile — up to 809
+   every multi-column layout collapses to one column
+   ========================================================= */
+@media (max-width: 809px) {
+  .case {
+    padding: 88px var(--pad) 40px;
+    gap: 40px;
+  }
+  .case-intro { gap: 40px; }
+  .case-title,
+  .case-related-title { font-size: 44px; }
+  .case-summary { gap: 32px; }
+  .case-overview-body { font-size: 24px; }
+  .case-meta {
+    flex-direction: column;
+    align-items: flex-start;
+    flex-wrap: nowrap;
+    gap: 24px;
+  }
+  .case-meta-item { flex: 0 0 auto; }
+  .case-label { font-size: 16px; }
+  .case-meta-value { font-size: 20px; }
+
+  .case-gallery {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+  .case-gallery .case-media,
+  .case-gallery .case-media.is-full { --ar: 1.2; }
+  .avatar-row { grid-template-columns: repeat(2, 1fr); gap: 12px; }
+  .case-text { padding: 8px 0; gap: 12px; }
+  .case-text p,
+  .case-text li { font-size: 18px; line-height: 1.35; }
+
+  .case-related { gap: 32px; }
+  .case-related-row {
+    flex-direction: column;
+    gap: 40px;
+  }
+  .case-related-row .work-card { flex: 0 0 auto; width: 100%; }
+}

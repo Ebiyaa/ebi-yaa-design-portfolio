@@ -1,0 +1,290 @@
+/* =========================================================
+   about page — values measured from the reference at 1440
+   (content column 1384). Loads after app.css; adds nothing
+   that app.css already provides.
+   ========================================================= */
+
+/* ---------- section 1 : hero + bio ---------- */
+.s-about-hero {
+  padding: 80px var(--pad);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 48px;
+}
+.s-about-hero .wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 66px;
+}
+
+.about-title {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 24px;
+}
+.about-title h1 {
+  width: 100%;
+  line-height: 1;
+}
+
+.about-row {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  gap: 24px;
+}
+
+/* 742 / 1384 and 618 / 1384 of the content column */
+.about-left {
+  flex: 742 1 0;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+.about-right {
+  flex: 618 1 0;
+  min-width: 0;
+}
+
+.bio {
+  max-width: 620px;
+  font-size: 32px;
+  line-height: 1.2;
+  font-weight: 500;
+  letter-spacing: -0.02em;
+  opacity: 0.6;
+}
+.bio-em {
+  font-style: normal;
+  font-weight: 700;
+  color: var(--fg-strong);
+}
+
+/* portrait — carries data-px, so it mirrors the .work-media
+   canvas mechanics that site.js expects */
+.about-portrait {
+  display: block;
+  position: relative;
+  width: 100%;
+  aspect-ratio: 618 / 704;
+  border-radius: 8px;
+  overflow: hidden;
+  background: #1c1c1c;
+}
+.about-portrait img,
+.about-portrait canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.about-portrait canvas { opacity: 0; transition: opacity 0.2s ease; }
+.about-portrait.px-ready canvas { opacity: 1; }
+.about-portrait.px-ready img { opacity: 0; }
+
+/* ---------- section 2 : experience + education ---------- */
+.s-exp {
+  padding: 80px var(--pad);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 48px;
+}
+.s-exp .wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 76px;
+}
+
+.exp-title {
+  font-size: 120px;
+  line-height: 0.9;
+  font-weight: 700;
+  letter-spacing: -0.06em;
+  text-align: left;
+}
+
+.exp-list {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.exp-rule {
+  height: 1px;
+  background: var(--rule);
+}
+
+/* three tracks: 512 / 360 / 512 of the 1384 column */
+.exp-row {
+  display: grid;
+  grid-template-columns: 512fr 360fr 512fr;
+  column-gap: 24px;
+  align-items: center;
+}
+
+.exp-a {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  min-width: 0;
+}
+.exp-role {
+  font-size: 24px;
+  line-height: 1.2;
+  font-weight: 500;
+  letter-spacing: -0.04em;
+}
+.exp-org {
+  font-size: 20px;
+  line-height: 1.2;
+  font-weight: 400;
+  letter-spacing: -0.04em;
+  opacity: 0.6;
+}
+
+.exp-b {
+  min-width: 0;
+  font-size: 16px;
+  line-height: 1.2;
+  font-weight: 400;
+  letter-spacing: -0.02em;
+  opacity: 0.7;
+}
+
+.exp-c {
+  min-width: 0;
+  text-align: right;
+  font-size: 24px;
+  line-height: 1.2;
+  font-weight: 500;
+  letter-spacing: -0.04em;
+}
+
+/* rows that link out (side quests) keep the identical row grid */
+a.exp-row { transition: opacity 0.25s ease; }
+a.exp-row:hover { opacity: 0.6; }
+
+/* floating media preview — follows the pointer while hovering a
+   side-quest row that carries data-preview. Desktop hover only. */
+.side-preview {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 260px;
+  aspect-ratio: 16 / 9;
+  border-radius: 8px;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 60;
+  opacity: 0;
+  transform: translate(-50%, -50%) scale(0.94);
+  transition: opacity 0.25s ease, transform 0.25s ease;
+  box-shadow: 0 24px 48px rgba(0, 0, 0, 0.45);
+  background: #1c1c1c;
+}
+.side-preview.is-active {
+  opacity: 1;
+  transform: translate(-50%, -50%) scale(1);
+}
+.side-preview img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* ---------- software — icon-over-name in a bordered box ---------- */
+.stack-row {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+}
+.stack-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  height: 128px;
+  padding: 20px;
+  border: 1px solid var(--rule);
+  border-radius: 8px;
+  color: var(--fg);
+}
+.stack-icon {
+  width: 28px;
+  height: 28px;
+  fill: currentColor;
+  color: var(--fg);
+  opacity: 0.35;
+}
+.stack-name {
+  font-size: 24px;
+  line-height: 1.2;
+  font-weight: 500;
+  letter-spacing: -0.02em;
+  text-align: center;
+}
+
+/* ---------- the cta band on this page ---------- */
+.s-cta { padding: 80px var(--pad); }
+
+/* =========================================================
+   tablet — 810 to 1199
+   ========================================================= */
+@media (max-width: 1199px) {
+  .s-about-hero .wrap { gap: 56px; }
+  .bio { font-size: 26px; max-width: none; }
+  .exp-title { font-size: 88px; }
+  .s-exp .wrap { gap: 56px; }
+  .exp-row { column-gap: 20px; }
+
+  .stack-row { grid-template-columns: repeat(3, 1fr); }
+
+  .s-cta { padding: 70px var(--pad); }
+}
+
+/* =========================================================
+   mobile — up to 809
+   ========================================================= */
+@media (max-width: 809px) {
+  .s-about-hero { padding: 48px var(--pad); gap: 32px; }
+  .s-about-hero .wrap { gap: 36px; }
+  .about-title { align-items: flex-start; gap: 16px; }
+
+  .about-row { flex-direction: column; gap: 32px; }
+  .about-left,
+  .about-right { flex: 0 0 auto; width: 100%; }
+  .about-left { gap: 24px; }
+  .bio { font-size: 20px; max-width: none; }
+
+  .s-exp { padding: 48px var(--pad); gap: 32px; }
+  .s-exp .wrap { gap: 40px; }
+  .exp-title { font-size: 44px; }
+
+  .exp-list { gap: 16px; }
+  .exp-row {
+    grid-template-columns: 1fr;
+    row-gap: 10px;
+    align-items: start;
+  }
+  .exp-role { font-size: 20px; }
+  .exp-org { font-size: 16px; }
+  .exp-c { font-size: 20px; text-align: left; }
+  .exp-b:empty { display: none; }
+
+  .stack-row { grid-template-columns: 1fr 1fr; }
+  .stack-item { height: 104px; padding: 16px; gap: 8px; }
+  .stack-icon { width: 22px; height: 22px; }
+  .stack-name { font-size: 20px; }
+
+  .s-cta { padding: 48px var(--pad); }
+}
