@@ -285,3 +285,26 @@
     };
   }
 })();
+
+/* ---------------------------------------------------------
+   mobile nav toggle — hamburger open/close
+   --------------------------------------------------------- */
+(function () {
+  "use strict";
+  var toggle = document.getElementById("nav-toggle");
+  var links = document.getElementById("nav-links");
+  if (!toggle || !links) return;
+
+  toggle.addEventListener("click", function () {
+    var isOpen = links.classList.toggle("is-open");
+    toggle.setAttribute("aria-expanded", isOpen ? "true" : "false");
+  });
+
+  var navLinkEls = links.querySelectorAll("a");
+  for (var i = 0; i < navLinkEls.length; i++) {
+    navLinkEls[i].addEventListener("click", function () {
+      links.classList.remove("is-open");
+      toggle.setAttribute("aria-expanded", "false");
+    });
+  }
+})();

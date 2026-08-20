@@ -112,6 +112,10 @@ body.cursor-none button { cursor: none; }
 }
 .nav-inner a:hover { opacity: 0.6; }
 .nav-toggle { display: none; }
+/* on desktop/tablet the wrapper is invisible to layout, so nav-inner's
+   flex children are still: logo, Work, About me, Let's talk — identical
+   to the original unwrapped markup. */
+.nav-links { display: contents; }
 
 /* ---------- shared ---------- */
 .wrap {
@@ -447,6 +451,54 @@ body.cursor-none button { cursor: none; }
   .nav-inner { gap: 20px; }
   .nav-inner a { font-size: 16px; }
   .nav-inner a.nav-logo { margin-right: auto; }
+
+  .nav-toggle {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+    width: 32px;
+    height: 32px;
+    padding: 0;
+    background: none;
+    border: none;
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .nav-toggle span {
+    display: block;
+    width: 22px;
+    height: 2px;
+    background: var(--fg-strong);
+    transition: transform 0.25s ease, opacity 0.25s ease;
+  }
+  .nav-toggle[aria-expanded="true"] span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+  .nav-toggle[aria-expanded="true"] span:nth-child(2) { opacity: 0; }
+  .nav-toggle[aria-expanded="true"] span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+  .nav-links {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 24px;
+    position: fixed;
+    top: var(--nav-h);
+    left: 0;
+    right: 0;
+    background: var(--bg);
+    padding: 32px 20px 40px;
+    transform: translateY(-12px);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.25s ease, transform 0.25s ease;
+    z-index: 10;
+  }
+  .nav-links.is-open {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+  }
 
   .s-hero { gap: 56px; padding-bottom: 56px; }
   .s-hero .wrap { gap: 48px; }
